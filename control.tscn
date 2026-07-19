@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bq3huk364skd3"]
+
+[ext_resource type="Script" uid="uid://c4721cn5h8ryr" path="res://Control_Scene/Main_Control.cs" id="1_0fbet"]
+[ext_resource type="Script" uid="uid://bgcc8hs71nbt6" path="res://Control_Scene/Matrix_Control.cs" id="2_62e2m"]
+
+[node name="Control" type="Control" unique_id=324703871]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0fbet")
+
+[node name="Matrix_Layout" type="ColorRect" parent="." unique_id=1381007097]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 370.0
+offset_bottom = 370.0
+color = Color(0.3665946, 0.3665946, 0.36659458, 1)
+
+[node name="Matrix_Control" type="Control" parent="." unique_id=934634208]
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 370.0
+offset_bottom = 370.0
+script = ExtResource("2_62e2m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1121129644]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 17.0
+offset_right = 537.0
+offset_bottom = 417.0
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer" unique_id=409907135]
+layout_mode = 2
+text = "Erase"
+alignment = 1
+
+[connection signal="toggled" from="VBoxContainer/CheckButton" to="Matrix_Control" method="Erase_toggle"]
