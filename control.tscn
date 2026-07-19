@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4721cn5h8ryr" path="res://Control_Scene/Main_Control.cs" id="1_0fbet"]
 [ext_resource type="Script" uid="uid://bgcc8hs71nbt6" path="res://Control_Scene/Matrix_Control.cs" id="2_62e2m"]
+[ext_resource type="Script" uid="uid://bsxto5wp4sdk8" path="res://Control_Scene/Container.cs" id="3_qtu10"]
 
 [node name="Control" type="Control" unique_id=324703871]
 layout_mode = 3
@@ -34,10 +35,21 @@ offset_left = 387.0
 offset_top = 17.0
 offset_right = 537.0
 offset_bottom = 417.0
+script = ExtResource("3_qtu10")
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer" unique_id=409907135]
 layout_mode = 2
 text = "Erase"
 alignment = 1
 
+[node name="IPAI" type="LineEdit" parent="VBoxContainer" unique_id=1585195957]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+placeholder_text = "input WS IP here"
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=660677923]
+layout_mode = 2
+text = "Connect To IP"
+
 [connection signal="toggled" from="VBoxContainer/CheckButton" to="Matrix_Control" method="Erase_toggle"]
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer" method="_on_button_pressed"]

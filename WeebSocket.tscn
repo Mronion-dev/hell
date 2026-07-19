@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dkihlowycetah"]
+
+[ext_resource type="Script" uid="uid://su808q0an4cg" path="res://Control_Scene/WeebSocket.cs" id="1_664p7"]
+
+[node name="WeebSocket" type="Node" unique_id=1328108006]
+script = ExtResource("1_664p7")
