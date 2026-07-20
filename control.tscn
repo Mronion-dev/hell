@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bgcc8hs71nbt6" path="res://Control_Scene/Matrix_Control.cs" id="2_62e2m"]
 [ext_resource type="Script" uid="uid://bsxto5wp4sdk8" path="res://Control_Scene/Container.cs" id="3_qtu10"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_6yyo6"]
+font_size = 12
+
 [node name="Control" type="Control" unique_id=324703871]
 layout_mode = 3
 anchors_preset = 15
@@ -51,5 +54,11 @@ placeholder_text = "input WS IP here"
 layout_mode = 2
 text = "Connect To IP"
 
+[node name="IPSN" type="Label" parent="VBoxContainer" unique_id=479159663]
+layout_mode = 2
+text = "Status: Null"
+label_settings = SubResource("LabelSettings_6yyo6")
+horizontal_alignment = 1
+
 [connection signal="toggled" from="VBoxContainer/CheckButton" to="Matrix_Control" method="Erase_toggle"]
-[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer" method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="ConnectToIP"]

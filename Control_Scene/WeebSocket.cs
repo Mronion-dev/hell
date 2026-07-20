@@ -5,7 +5,7 @@ public partial class WeebSocket : Node
 	private readonly WebSocketPeer _socket = new();
 
 	[Export]
-	public string ServerAddress = "ws://localhost:8080";
+	public string ServerAddress = "ws://192.168.10.47/ws";
 
 	public void Connect()
 	{
@@ -50,10 +50,11 @@ public partial class WeebSocket : Node
 	{
 		if (!Connected)
 		{
-			return("not connected");
+			return;
 		}
 
 		_socket.Send(frame);
+		GD.Print("frame sent");
 	}
 
 	public void SendText(string text)
@@ -62,5 +63,18 @@ public partial class WeebSocket : Node
 			return;
 
 		_socket.SendText(text);
+	}
+
+	public string Connection_Status()
+	{
+		if (!Connected)
+		{
+			return($"Null @{ServerAddress}");
+		}
+		else
+		{
+			return($"True @{ServerAddress}");
+		}
+		
 	}
 }
