@@ -6,11 +6,11 @@ using System;
 
 public partial class Matrix_Control : Control
 {
-	private const int WIDTH = 8;
-	private const int HEIGHT = 8;
-	private const int CELL_SIZE = 40;
+	public const int WIDTH = 8;
+	public const int HEIGHT = 8;
+	public const int CELL_SIZE = 40;
 
-	private bool[,] pixels = new bool[HEIGHT, WIDTH];
+	public static bool[,] pixels = new bool[HEIGHT, WIDTH];
 
 	WeebSocket WebSocket = new WeebSocket();
 
@@ -23,13 +23,6 @@ public partial class Matrix_Control : Control
 		);
 
 		QueueRedraw();
-	}
-
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		WebSocket.SendFrame(GetFrameBytes());
 	}
 
 	// Called every Main GUI change or when redraw() is called
@@ -93,25 +86,5 @@ public partial class Matrix_Control : Control
 		erase = @toggled_on;
 	}
 
-	private byte[] GetFrameBytes()
-	{
-		byte[] frame = new byte[8];
 
-		for (int y = 0; y < 8; y++)
-		{
-			byte row = 0;
-
-			for (int x = 0; x < 8; x++)
-			{
-				if (pixels[y, x])
-				{
-					row |= (byte)(1 << (7 - x));
-	 		   }
-			}
-
-			frame[y] = row;
-		}
-
-		return frame;
-	}
 }

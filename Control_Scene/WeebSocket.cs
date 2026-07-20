@@ -24,15 +24,6 @@ public partial class WeebSocket : Node
 				break;
 
 			case WebSocketPeer.State.Open:
-				while (_socket.GetAvailablePacketCount() > 0)
-				{
-					var packet = _socket.GetPacket();
-
-					if (_socket.WasStringPacket())
-						GD.Print(packet.GetStringFromUtf8());
-					else
-						GD.Print($"Received {packet.Length} bytes");
-				}
 				break;
 
 			case WebSocketPeer.State.Closing:
@@ -50,6 +41,7 @@ public partial class WeebSocket : Node
 	{
 		if (!Connected)
 		{
+			GD.Print("NO CONNECTION!!!");
 			return;
 		}
 

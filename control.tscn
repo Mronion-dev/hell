@@ -4,9 +4,6 @@
 [ext_resource type="Script" uid="uid://bgcc8hs71nbt6" path="res://Control_Scene/Matrix_Control.cs" id="2_62e2m"]
 [ext_resource type="Script" uid="uid://bsxto5wp4sdk8" path="res://Control_Scene/Container.cs" id="3_qtu10"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_6yyo6"]
-font_size = 12
-
 [node name="Control" type="Control" unique_id=324703871]
 layout_mode = 3
 anchors_preset = 15
@@ -32,12 +29,17 @@ offset_right = 370.0
 offset_bottom = 370.0
 script = ExtResource("2_62e2m")
 
+[node name="SendRate" type="Timer" parent="Matrix_Control" unique_id=386276393]
+process_callback = 0
+wait_time = 0.1
+autostart = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1121129644]
 layout_mode = 0
-offset_left = 387.0
-offset_top = 17.0
-offset_right = 537.0
-offset_bottom = 417.0
+offset_left = 381.0
+offset_top = 33.0
+offset_right = 541.0
+offset_bottom = 433.0
 script = ExtResource("3_qtu10")
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer" unique_id=409907135]
@@ -54,11 +56,15 @@ placeholder_text = "input WS IP here"
 layout_mode = 2
 text = "Connect To IP"
 
-[node name="IPSN" type="Label" parent="VBoxContainer" unique_id=479159663]
-layout_mode = 2
-text = "Status: Null"
-label_settings = SubResource("LabelSettings_6yyo6")
-horizontal_alignment = 1
+[node name="IPCS" type="RichTextLabel" parent="." unique_id=1292934832]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 387.0
+offset_right = 507.0
+offset_bottom = 510.0
+theme_override_font_sizes/normal_font_size = 22
+text = "Connection status will be displayed here and here is some randome text for testing"
 
+[connection signal="timeout" from="Matrix_Control/SendRate" to="." method="_timeout"]
 [connection signal="toggled" from="VBoxContainer/CheckButton" to="Matrix_Control" method="Erase_toggle"]
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="ConnectToIP"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_ConnectToIP"]
