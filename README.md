@@ -1,1 +1,5 @@
+ESP32 Display Renderer project made using godot C#
+
+Contributers / Helpers in this project: Lepsima, Alexecrable, Makrelen
+
 Vectors and icons by <a href="https://www.figma.com/community/file/1166831539721848736?ref=svgrepo.com" target="_blank">Solar Icons</a> in CC Attribution License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
