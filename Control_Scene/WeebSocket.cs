@@ -2,28 +2,55 @@ using Godot;
 
 public partial class WeebSocket : Node
 {
-	private readonly WebSocketPeer _socket = new();
+	private WebSocketPeer _socket = new();
 
 	[Export]
 	public string ServerAddress = "ws://192.168.10.47/ws";
+	private bool IsConected = false;
+
+	public override void _Ready()
+	{
+		GD.Print($"WebSocket Initialized at Inst. ID {GetInstanceId()}");
+		GD.Print($"WebSocket._socket Initialized at Inst. ID {_socket.GetInstanceId()}");
+	}
 
 	public void Connect()
 	{
+		if (_socket.GetReadyState() != WebSocketPeer.State.Closed)
+			return;
+
 		Error err = _socket.ConnectToUrl(ServerAddress);
-		GD.Print($"Connect returned: {err}");
-		return;
+		if(err == Error.Ok)
+		{
+			IsConected = true;
+			GD.Print("Connection returns ok");
+		}
 	}
 
 	public override void _Process(double delta)
 	{
+		if(!IsConected)
+		{
+			return;
+		}
 		_socket.Poll();
-
 		switch (_socket.GetReadyState())
 		{
 			case WebSocketPeer.State.Connecting:
 				break;
 
 			case WebSocketPeer.State.Open:
+
+				while (_socket.GetAvailablePacketCount() > 0)
+				{
+					var packet = _socket.GetPacket();
+
+					if (_socket.WasStringPacket())
+						GD.Print(packet.GetStringFromUtf8());
+					else
+						GD.Print($"Received {packet.Length} bytes");
+				}
+
 				break;
 
 			case WebSocketPeer.State.Closing:
@@ -41,12 +68,10 @@ public partial class WeebSocket : Node
 	{
 		if (!Connected)
 		{
-			GD.Print("NO CONNECTION!!!");
 			return;
 		}
 
 		_socket.Send(frame);
-		GD.Print("frame sent");
 	}
 
 	public void SendText(string text)
@@ -58,15 +83,7 @@ public partial class WeebSocket : Node
 	}
 
 	public string Connection_Status()
-	{
-		if (!Connected)
-		{
-			return($"Null @{ServerAddress}");
-		}
-		else
-		{
-			return($"True @{ServerAddress}");
-		}
-		
-	}
+{
+	return $"{_socket.GetReadyState()} @ {ServerAddress}\n connected returns {Connected} and _socket id is {_socket.GetInstanceId()}";
+}
 }

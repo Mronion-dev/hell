@@ -12,7 +12,6 @@ public partial class Matrix_Control : Control
 
 	public static bool[,] pixels = new bool[HEIGHT, WIDTH];
 
-	WeebSocket WebSocket = new WeebSocket();
 
 	public override void _Ready()
 	{
